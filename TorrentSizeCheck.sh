@@ -2,11 +2,11 @@ totalsize=0
 megabytes=0
 gigabytes=0
 size=0
-read -p "File Path or dir": dir
+dir="$1"
 for entry in "$dir"/*.torrent
 do
 count=$((count + 1))
-echo $count
+echo "file $count"
 echo "$entry"
 size=$(head -1 "$entry" | grep -aoE '6:lengthi[0-9]+' | cut -di -f2 | awk '{s+=$1} END {print s}')
 megabytes=$((size / 1000000))
