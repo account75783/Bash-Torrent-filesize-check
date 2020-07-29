@@ -3,6 +3,7 @@ megabytes=0
 gigabytes=0
 size=0
 dir="$1"
+if [ -d "${dir}" ] ; then
 for entry in "$dir"/*.torrent
 do
 count=$((count + 1))
@@ -14,4 +15,12 @@ gigabytes=$((size / 1000000000))
 totalsize=$((totalsize + gigabytes))
 echo "Torrent size: $megabytes MB ~ $gigabytes GB"
 done
+fi
+if [ -f "${dir}" ] ; then
+size=$(head -1 "$dir" | grep -aoE '6:lengthi[0-9]+' | cut -di -f2 | awk '{s+=$1} END {print s}')
+megabytes=$((size / 1000000))
+gigabytes=$((size / 1000000000))
+totalsize=$((totalsize + gigabytes))
+echo "Torrent size: $megabytes MB ~ $gigabytes GB"
+fi
 echo "Size of all torrents listed $totalsize GB"
