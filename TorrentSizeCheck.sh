@@ -24,3 +24,4 @@ totalsize=$((totalsize + megabytes))
 echo "Torrent size: $megabytes MB ~ $gigabytes GB"
 fi
 echo "Size of all torrents listed $totalsize MB"
+echo $(($totalsize / 1000)) "GB"
