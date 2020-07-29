@@ -10,16 +10,16 @@ count=$((count + 1))
 echo "file $count"
 echo "$entry"
 size=$(head -1 "$entry" | grep -aoE '6:lengthi[0-9]+' | cut -di -f2 | awk '{s+=$1} END {print s}')
-megabytes=$((size / 1000000))
-gigabytes=$((size / 1000000000))
+megabytes=$((size / 1048576))
+gigabytes=$((size / 1073741824))
 totalsize=$((totalsize + gigabytes))
 echo "Torrent size: $megabytes MB ~ $gigabytes GB"
 done
 fi
 if [ -f "${dir}" ] ; then
 size=$(head -1 "$dir" | grep -aoE '6:lengthi[0-9]+' | cut -di -f2 | awk '{s+=$1} END {print s}')
-megabytes=$((size / 1000000))
-gigabytes=$((size / 1000000000))
+megabytes=$((size / 1048576))
+gigabytes=$((size / 1073741824))
 totalsize=$((totalsize + gigabytes))
 echo "Torrent size: $megabytes MB ~ $gigabytes GB"
 fi
